@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<!--baidu tongji-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?08ad12b3f3a57aa8aa23ea41b8bc9214";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!--baidu tongji end-->
+
+  <meta charset="utf-8">
+  
+  <title>OCT图像运动伪像补偿(1) | Dys&#39;s blog</title>
+  <meta name="author" content="Dys">
+  
+  <meta name="description" content="blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="OCT图像运动伪像补偿(1)"/>
+  <meta property="og:site_name" content="Dys&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="alternate" href="/atom.xml" title="Dys&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Dys&#39;s blog</a></h1>
+  <h2><a href="/">keep going on!</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/tools">工具</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-04-06T11:26:45.000Z"><a href="/2016/04/06/1604063/">2016-04-06</a></time>
+      
+      
+  
+    <h1 class="title">OCT图像运动伪像补偿(1)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>　　本系列将介绍对oct(<code>Optical coherence tomography</code>)成像过程中图像序列的运动伪像补偿方法，将涉及<code>图像降噪处理算法</code>，<code>图形边缘检测算法</code>，以及<code>运动伪像补偿算法</code>等。<br>　　本节介绍OCT原理和成像系统搭建。</p>
+<center><h4><span style="color: blue; font-size: 20pt;">1. OCT原理</span></h4></center>
+
+<p>　　<code>光学相干断层扫描</code>主要利用的是<code>光的干涉</code>原理，干涉在物理学中，指的是两列或两列以上的波在空间中重叠时发生叠加，从而形成新波形的现象。例如采用分束器将一束单色光束分成两束后，再让它们在空间中的某个区域内重叠，将会发现在重叠区域内的光强并不是均匀分布的：其明暗程度随其在空间中位置的不同而变化，最亮的地方超过了原先两束光的光强之和，而最暗的地方光强有可能为零，这种光强的重新分布被称作“干涉条纹”。<br>　　<a id="more"></a><br>　　干涉成像的原理就是将光源发出的光线分成两束，一束发射到被测组织上(<code>信号臂</code>)，另一束发射到参照反光镜上(<code>参照臂</code>)。从组织中反射回来的光信号随组织的性状而显示不同强弱，把它与反光镜反射回来的参考光信号叠加，光波顶点一致时信号增强(增加干涉)，光波顶点方向相反时信号减弱(消减干涉)。利用干涉原理，OCT干涉只发生在信号臂和参考臂长度相等时，所以改变反光镜的位置，就改变了参考臂的长度，则可得到不同深度的组织信号。这些光信号经过计算机处理便可得到组织断层成像,如下图<br>　<center>　<img src="http://ww2.sinaimg.cn/large/bcd92541gw1f2nat0htenj20bt0a53z5.jpg" alt=""></center></p>
+<p> 　</p>
+<center><h4><span style="color: blue; font-size: 20pt;">2.　OCT成像系统的搭建</span></h4></center>
+
+<p>　　OCT系统的示意图如图2-2所示，这是一个扫频的OCT成像系统，为了检测管腔内部的完整构造，实现360度扫描，需要借助一个微电机导管，电机控制旋转，下面的移动平台控制纵向的移动，两者结合就可以实现对一个管腔的三维立体扫描，经过光电转化和信号采集，可以利用<code>CUDA</code>平台在<code>GPU</code>上进行高速并行处理，最终成像。<br>　　A扫描获得的是由于干涉信号的振幅对参照镜的位置所形成的深度信息，B扫描是由探测光束在几秒内横向扫描组织所形成的数百A扫描线构成的，通过处理和图像重建可以获得组织的断层图像。<br>　　理想状况下我们希望得到的每幅二维图代表的是一个完整截面的图像，经过纵向移动扫描，得到一组纵向的图像序列，然后对序列进行伪像补偿后进行三维重构，得到最终的三维图像。<br>　　<img src="http://ww4.sinaimg.cn/large/bcd92541gw1f2nazyzwhoj20es0d4taa.jpg" alt="">
+　</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/图像处理/">图像处理</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/OCT/">OCT</a>, <a href="/tags/图像处理/">图像处理</a>
+  </div>
+
+<!-- Baidu Button begin -->
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"image":{"viewList":["tsina","weixin","fbook","twi","qzone","tqq","renren","douban","tieba"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","weixin","fbook","twi","qzone","tqq","renren","douban","tieba"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!-- Baidu Button END -->     
+ 
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2016/04/09/1604091/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/04/06/1604062/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/04/06/1604063/" data-title="OCT图像运动伪像补偿(1)" data-url="http://yoursite.com/2016/04/06/1604063/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"dengysh"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/cocos2dx/">cocos2dx</a><small>2</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>4</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/notepad/">notepad</a><small>1</small></li>
+  
+    <li><a href="/categories/npm/">npm</a><small>1</small></li>
+  
+    <li><a href="/categories/other/">other</a><small>1</small></li>
+  
+    <li><a href="/categories/分享/">分享</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>7</small></li>
+  
+    <li><a href="/categories/图像处理/">图像处理</a><small>3</small></li>
+  
+    <li><a href="/categories/算法/">算法</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">@me</h3>
+<ul class="entry">
+<li><a href="mailto:dys0105@gmail.com?subject=test&cc=sample@hotmail.com&body=use mailto sample">send mail</a></li>
+<li><a href="http://weibo.com/3168347457/profile?topnav=1&wvr=6&is_all=1">Weibo</a></li>
+<li><a href="https://dengysh.github.io">Blog</a></li>
+<li><a href="https://github.com/dengysh">Github</a></li>
+<li><a href="https://www.facebook.com/profile.php?id=100007430838248">Fb</a></li>
+<li><a href="https://twitter.com/dys0105">Twitter</a></li>
+</ul>
+</div>
+
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/OCT/" style="font-size: 15px;">OCT</a> <a href="/tags/cocos2dx/" style="font-size: 12.5px;">cocos2dx</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/emoji/" style="font-size: 10px;">emoji</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/music/" style="font-size: 12.5px;">music</a> <a href="/tags/notepad/" style="font-size: 10px;">notepad</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/其它/" style="font-size: 10px;">其它</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/图像处理/" style="font-size: 15px;">图像处理</a> <a href="/tags/技巧/" style="font-size: 17.5px;">技巧</a> <a href="/tags/游戏开发/" style="font-size: 12.5px;">游戏开发</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://www.csdn.net/" title="title" target="_blank">CSDN  </a></li>
+<li><a href="http://music.163.com/#/discover" title="title" target="_blank">网易云音乐  </a></li>
+<li><a href="http://www.narutom.com/" title="title" target="_blank">火影中文网  </a></li>
+<li><a href="http://www.bilibili.com/" title="title" target="_blank">B站  </a></li>
+<li><a href="http://www.acfun.tv/" title="title" target="_blank">A站</a></li>
+
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3168347457&verifier=e0898823&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+
+
+<a href="https://github.com/dengysh" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="/img/forkme.png" width = "100" height = "100"  alt="Fork me on GitHub"></a>

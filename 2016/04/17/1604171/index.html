@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<!--baidu tongji-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?08ad12b3f3a57aa8aa23ea41b8bc9214";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!--baidu tongji end-->
+
+  <meta charset="utf-8">
+  
+  <title>CSS基础总结(2) | Dys&#39;s blog</title>
+  <meta name="author" content="Dys">
+  
+  <meta name="description" content="blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CSS基础总结(2)"/>
+  <meta property="og:site_name" content="Dys&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="alternate" href="/atom.xml" title="Dys&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Dys&#39;s blog</a></h1>
+  <h2><a href="/">keep going on!</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/tools">工具</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-04-17T02:31:55.000Z"><a href="/2016/04/17/1604171/">2016-04-17</a></time>
+      
+      
+  
+    <h1 class="title">CSS基础总结(2)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://www.emoji-cheat-sheet.com/graphics/emojis/cyclone.png" height="20" width="20" align="absmiddle"></p>
+<h2 id="1-文字段落排版"><a href="#1-文字段落排版" class="headerlink" title="1. 文字段落排版"></a>1. 文字段落排版</h2><p>1.<strong>字体</strong>：<code>body{font-family:&quot;宋体&quot;;}</code> <code>body{font-family:&quot;Microsoft Yahei&quot;;}</code>或<code>body{font-family:&quot;微软雅黑&quot;;}</code>英文的兼容性更好<br>2.<strong>字号颜色</strong>：<code>body{font-size:12px;color:#666}</code>大小一般都用像素单位，颜色有多重表达方式。可用十六进制数，或者rgb(r,g,b)形式每个分量0~255.或者使用名称red，blue等。<br>3.<strong>粗体斜体下划线删除线</strong>：font-weight:bold; font-style:italic; text-decoration:underline; text-decoration:line-through;<br><a id="more"></a><br>4.<strong>缩进行间距文字间距对齐</strong>：text-indent:2em;line-height:1.5em;<strong>letter-spacing:50px;word-spacing:50px;</strong>前一个是字母间距后一个是单词。text-align:center/right/left;为块儿状元素的内容设置对齐方式</p>
+<h2 id="2-元素分类"><a href="#2-元素分类" class="headerlink" title="2.元素分类"></a>2.元素分类</h2><p>在CSS中，html中的标签元素大体被分为三种不同的类型：<strong>块状元素、内联元素(又叫行内元素)和内联块状元素</strong>。<br>常用的块状元素有：<br><code>&lt;div&gt;、&lt;p&gt;、&lt;h1&gt;...&lt;h6&gt;、&lt;ol&gt;、&lt;ul&gt;、&lt;dl&gt;、&lt;table&gt;、&lt;address&gt;、&lt;blockquote&gt; 、&lt;form&gt;</code><br>常用的内联元素有：<br><code>&lt;a&gt;、&lt;span&gt;、&lt;br&gt;、&lt;i&gt;、&lt;em&gt;、&lt;strong&gt;、&lt;label&gt;、&lt;q&gt;、&lt;var&gt;、&lt;cite&gt;、&lt;code&gt;</code><br>常用的内联块状元素有：<br><code>&lt;img&gt;、&lt;input&gt;</code><br><strong>块级元素特点：</strong><br>1.每个块级元素都从新的一行开始，并且其后的元素也另起一行。（真霸道，一个块级元素独占一行）<br>2.元素的高度、宽度、行高以及顶和底边距都可设置。<br>3.元素宽度在不设置的情况下，是它本身父容器的100%（和父元素的宽度一致），除非设定一个宽度。<br>4.使用display:block;可设置块儿状元素<br><strong>内联元素特点：</strong><br>1.和其他元素都在一行上；<br>2.元素的高度、宽度及顶部和底部边距<strong>不可</strong>设置；<br>3.元素的宽度就是它包含的文字或图片的宽度，<strong>不可</strong>改变<br>4.display:inline;设置内联元素<br><strong>内联块状元素特点：</strong><br>1.和其他元素都在一行上；<br>2.元素的高度、宽度、行高以及顶和底边距都可设置。<br>3.display:inline-block;设置内联块状</p>
+<h2 id="3-盒模型"><a href="#3-盒模型" class="headerlink" title="3. 盒模型"></a>3. 盒模型</h2><p><img src="http://ww4.sinaimg.cn/large/bcd92541gw1f2zj1jntgrj209r04nt9h.jpg"><br>通过上图知道一个元素实际宽度（盒子的宽度）=左边界+左边框+左填充+内容宽度+右填充+右边框+右边界。边框就是围绕着内容及补白的线，这条线你可以设置它的粗细、样式和颜色.如<code>border:2px  solid  red;</code>border-style（边框样式）常见样式有：dashed（虚线）| dotted（点线）| solid（实线）。也可以分开写:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">border-width</span>:<span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">border-style</span>:solid;</span><br><span class="line">    <span class="attribute">border-color</span>:red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每个部分都是四个方向的并且可以分别设置，如border-top，padding-right，也可以用margin,padding,设置四个方向.<strong>padding和margin的区别，padding在边框里，margin在边框外。</strong><br>比如下面代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid red;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">10px</span>;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>素的实际长度为：10px+1px+20px+200px+20px+1px+10px=262px。在chrome浏览器下可查看元素盒模型，如下图：<br><img src="http://ww2.sinaimg.cn/large/bcd92541gw1f2zjayfxhjj209o07waap.jpg"></p>
+<h2 id="4-布局模型"><a href="#4-布局模型" class="headerlink" title="4.布局模型"></a>4.布局模型</h2><p>在网页中，元素有三种布局模型：<br>1.流动模型（Flow）是默认的网页布局模式。特点：第一点，块状元素都会在所处的包含元素内自上而下按顺序垂直延伸分布，因为在默认状态下，块状元素的宽度都为100%。实际上，块状元素都会以行的形式占据位置。第二点，在流动模型下，内联元素都会在所处的包含元素内从左到右水平分布显示。（内联元素可不像块状元素这么霸道独占一行）</p>
+<p>2.浮动模型 (Float)可以用 CSS 定义为浮动<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">div&#123;</span><br><span class="line">    width:200px;</span><br><span class="line">    height:200px;</span><br><span class="line">    border:2px red solid;</span><br><span class="line">    float:left;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：<br><img src="http://ww4.sinaimg.cn/large/bcd92541gw1f2zkxo6ot3j20ii09k74r.jpg"><br>3.层模型（Layer）CSS定义了一组定位（positioning）属性来支持层布局模型。</p>
+<ul>
+<li>绝对定位需要设置position:absolute(表示绝对定位)这条语句的作用将元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的父包含块进行绝对定位。如果不存在这样的包含块，则相对于body元素，即相对于浏览器窗口</li>
+<li>相对定位需要设置position:relative（表示相对定位），它通过left、right、top、bottom属性确定元素在正常文档流中的偏移位置。相对定位完成的过程是首先按static(float)方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于以前的位置移动，移动的方向和幅度由left、right、top、bottom属性确定，偏移前的位置保留不动。</li>
+<li>固定定位需要设置position:fixed（表示固定定位），与absolute定位类型类似，但它的相对移动的坐标是视图（屏幕内的网页窗口）本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置，不会受文档流动影响，这与background-attachment:fixed;属性功能相同。</li>
+<li>Relative与Absolute组合使用。使用position:absolute可以实现被设置元素相对于浏览器（body）设置定位以后，大家有没有想过可不可以相对于其它元素进行定位呢？答案是肯定的，当然可以。使用position:relative来帮忙，但是必须遵守下面规范：参照定位的元素必须是相对定位元素的前辈元素：参照定位的元素必须加入position:relative;定位元素加入position:absolute，便可以使用top、bottom、left、right来进行偏移定位了。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>相对参照元素进行定位<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span><br><span class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">border</span>:<span class="number">2px</span> red solid;&#125;</span><br><span class="line"><span class="selector-id">#box1</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">position</span>:relative;</span><br><span class="line">          </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#box2</span>&#123;</span><br><span class="line"> 	<span class="attribute">position</span>:absolute;</span><br><span class="line">	<span class="attribute">top</span>:<span class="number">20px</span>;</span><br><span class="line">	<span class="attribute">left</span>:<span class="number">30px</span>;</span><br><span class="line">          </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#box3</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">200px</span>;</span><br><span class="line">     <span class="attribute">position</span>:relative;      </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#box4</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">99%</span>;</span><br><span class="line"> 	<span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">bottom</span>:<span class="number">0px</span>;</span><br><span class="line">	</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box1"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box2"</span>&gt;</span>相对参照元素进行定位<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box3"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://img.mukewang.com/541a7d8a00018cf102000200.jpg"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box4"</span>&gt;</span>当我还是三年级的学生时是一个害羞的小女生<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>效果：<br><img src="http://ww4.sinaimg.cn/large/bcd92541gw1f2zkrswqf5j20al0cdaar.jpg"></p>
+<center>本节完<img src="http://www.emoji-cheat-sheet.com/graphics/emojis/sleeping.png" height="20" width="20" align="absmiddle"></center>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/前端/">前端</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/前端/">前端</a>, <a href="/tags/css/">css</a>
+  </div>
+
+<!-- Baidu Button begin -->
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"image":{"viewList":["tsina","weixin","fbook","twi","qzone","tqq","renren","douban","tieba"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","weixin","fbook","twi","qzone","tqq","renren","douban","tieba"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!-- Baidu Button END -->     
+ 
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2016/04/17/1604172/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/04/16/1604165/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/04/17/1604171/" data-title="CSS基础总结(2)" data-url="http://yoursite.com/2016/04/17/1604171/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"dengysh"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/cocos2dx/">cocos2dx</a><small>2</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>4</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/notepad/">notepad</a><small>1</small></li>
+  
+    <li><a href="/categories/npm/">npm</a><small>1</small></li>
+  
+    <li><a href="/categories/other/">other</a><small>1</small></li>
+  
+    <li><a href="/categories/分享/">分享</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>7</small></li>
+  
+    <li><a href="/categories/图像处理/">图像处理</a><small>3</small></li>
+  
+    <li><a href="/categories/算法/">算法</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">@me</h3>
+<ul class="entry">
+<li><a href="mailto:dys0105@gmail.com?subject=test&cc=sample@hotmail.com&body=use mailto sample">send mail</a></li>
+<li><a href="http://weibo.com/3168347457/profile?topnav=1&wvr=6&is_all=1">Weibo</a></li>
+<li><a href="https://dengysh.github.io">Blog</a></li>
+<li><a href="https://github.com/dengysh">Github</a></li>
+<li><a href="https://www.facebook.com/profile.php?id=100007430838248">Fb</a></li>
+<li><a href="https://twitter.com/dys0105">Twitter</a></li>
+</ul>
+</div>
+
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/OCT/" style="font-size: 15px;">OCT</a> <a href="/tags/cocos2dx/" style="font-size: 12.5px;">cocos2dx</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/emoji/" style="font-size: 10px;">emoji</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/music/" style="font-size: 12.5px;">music</a> <a href="/tags/notepad/" style="font-size: 10px;">notepad</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/其它/" style="font-size: 10px;">其它</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/图像处理/" style="font-size: 15px;">图像处理</a> <a href="/tags/技巧/" style="font-size: 17.5px;">技巧</a> <a href="/tags/游戏开发/" style="font-size: 12.5px;">游戏开发</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://www.csdn.net/" title="title" target="_blank">CSDN  </a></li>
+<li><a href="http://music.163.com/#/discover" title="title" target="_blank">网易云音乐  </a></li>
+<li><a href="http://www.narutom.com/" title="title" target="_blank">火影中文网  </a></li>
+<li><a href="http://www.bilibili.com/" title="title" target="_blank">B站  </a></li>
+<li><a href="http://www.acfun.tv/" title="title" target="_blank">A站</a></li>
+
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3168347457&verifier=e0898823&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+
+
+<a href="https://github.com/dengysh" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="/img/forkme.png" width = "100" height = "100"  alt="Fork me on GitHub"></a>

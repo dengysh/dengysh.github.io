@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<!--baidu tongji-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?08ad12b3f3a57aa8aa23ea41b8bc9214";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!--baidu tongji end-->
+
+  <meta charset="utf-8">
+  
+  <title>html基础总结(2) | Dys&#39;s blog</title>
+  <meta name="author" content="Dys">
+  
+  <meta name="description" content="blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="html基础总结(2)"/>
+  <meta property="og:site_name" content="Dys&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="alternate" href="/atom.xml" title="Dys&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Dys&#39;s blog</a></h1>
+  <h2><a href="/">keep going on!</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/tools">工具</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-04-16T07:54:21.000Z"><a href="/2016/04/16/1604163/">2016-04-16</a></time>
+      
+      
+  
+    <h1 class="title">html基础总结(2)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://www.emoji-cheat-sheet.com/graphics/emojis/snowflake.png" height="20" width="20" align="absmiddle"></p>
+<h2 id="1-常用标签"><a href="#1-常用标签" class="headerlink" title="1. 常用标签"></a>1. 常用标签</h2><ol>
+<li><code>&lt;a&gt;</code>标签可实现超链接，它在网页制作中可以说是无处不在，只要有链接的地方，就会有这个标签。语法：<code>&lt;a  href=&quot;目标网址&quot;  title=&quot;鼠标滑过显示的文本&quot;&gt;链接显示的文本&lt;/a&gt;</code>加入<code>target=&quot;_blank&quot;</code>表示在新窗口打开连接。</li>
+<li><code>img</code>标签，用法<code>&lt;img src=&quot;图片地址&quot; alt=&quot;下载失败时的替换文本&quot; title = &quot;提示文本&quot;&gt;</code>src：标识图像的位置；alt：指定图像的描述性文本，当图像不可见时（下载不成功时），可看到该属性指定的文本；<a id="more"></a>title：提供在图像可见时对图像的描述(鼠标滑过图片时显示的文本)；图像可以是GIF，PNG，JPEG格式的图像文件。<h2 id="2-表单"><a href="#2-表单" class="headerlink" title="2. 表单"></a>2. 表单</h2>网站怎样与用户进行交互？答案是使用HTML表单(form)。表单是可以把浏览者输入的数据传送到服务器端，这样服务器端程序就可以处理表单传过来的数据。用法<code>&lt;form   method=&quot;传送方式&quot;   action=&quot;服务器文件&quot;&gt;</code>action ：浏览者输入的数据被传送到的地方,比如一个PHP页面(save.php)。method ： 数据传送的方式（get/post）,value为提示信息。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>    <span class="attr">method</span>=<span class="string">"post"</span>   <span class="attr">action</span>=<span class="string">"save.php"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"username"</span>&gt;</span>用户名:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"username"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"pass"</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"pass"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<form method="post" action="save.php"><br>   <label for="username">用户名:</label><input type="text" name="username" value="username"><br>   <label for="pass">密码:</label><input type="password" name="pass"><br></form><br><code>&lt;textarea&gt;</code>支持多行文本输入<br><code>&lt;textarea cols=&quot;50&quot; rows=&quot;10&quot;&gt;在这里输入内容...&lt;/textarea&gt;</code><br><textarea cols="50" rows="10">在这里输入内容…</textarea><br>在使用表单设计调查表时，为了减少用户的操作，使用选择框是一个好主意，html中有两种选择框，即单选框和复选框，两者的区别是单选框中的选项用户只能选择一项，而复选框中用户可以任意选择多项，甚至全选。语法<code>&lt;input   type=&quot;radio/checkbox&quot;   value=&quot;值&quot;    name=&quot;名称&quot;   checked=&quot;checked&quot;/&gt;</code>type:当 type=”radio” 时，控件为单选框当 type=”checkbox” 时，控件为复选框.value：提交数据到服务器的值（后台程序PHP使用）.name：为控件命名，以备后台程序 ASP、PHP 使用.checked：当设置 checked=”checked” 时，该选项被默认选中.<strong>注意:同一组的单选按钮，name 取值一定要一致</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"save.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span>性别:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span>男<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">"1"</span>  <span class="attr">name</span>=<span class="string">"gender"</span> <span class="attr">checked</span>=<span class="string">"checked"</span> /&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span>女<span class="tag">&lt;/<span class="name">label</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">"2"</span>  <span class="attr">name</span>=<span class="string">"gender"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><form action="save.php" method="post"><label>性别:</label><br>    <label>男</label><input type="radio" value="1" name="gender" checked="checked"> <label>女</label> <input type="radio" value="2" name="gender"><br></form><br>使用下拉列表框:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"save.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>爱好:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"看书"</span>&gt;</span>看书<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"旅游"</span> <span class="attr">selected</span>=<span class="string">"selected"</span>&gt;</span>旅游<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"运动"</span>&gt;</span>运动<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"购物"</span>&gt;</span>购物<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><form action="save.php" method="post"><br>    <label>爱好:</label><select><option value="看书">看书</option><br>      <option value="旅游" selected="selected">旅游</option><option value="运动">运动</option><option value="购物">购物</option><br>    </select><br></form><br>value是向服务器提交的值，设置selected=”selected”属性，则该选项就被默认选中<br>下拉列表也可以进行多选操作，在<code>&lt;select&gt;</code>标签中设置<code>multiple=&quot;multiple&quot;</code>属性，就可以实现多选功能，在windows操作系统下，进行多选时按下Ctrl键同时进行单击.<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"save.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>爱好:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">multiple</span>=<span class="string">"multiple"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"看书"</span>&gt;</span>看书<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"旅游"</span>&gt;</span>旅游<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"运动"</span>&gt;</span>运动<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"购物"</span>&gt;</span>购物<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><form action="save.php" method="post"><br>    <label>爱好:</label><br>    <select multiple="multiple"><br>      <option value="看书">看书</option><br>      <option value="旅游">旅游</option><br>      <option value="运动">运动</option><br>      <option value="购物">购物</option><br>    </select><br></form><br>在表单中有两种按钮可以使用，分别为：提交按钮、重置。当用户需要提交表单信息到服务器时，需要用到提交按钮。<code>&lt;input   type=&quot;submit&quot;   value=&quot;提交&quot;&gt;</code>type：只有当type值设置为submit时，按钮才有提交作用value：按钮上显示的文字.当用户需要重置表单信息到初始时的状态时，比如用户输入“用户名”后，发现书写有误，可以使用重置按钮.使输入框恢复到初始状态。只需要把type设置为”reset”就可以<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"save.php"</span> <span class="attr">method</span>=<span class="string">"post"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>爱好:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"看书"</span>&gt;</span>看书<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"旅游"</span> <span class="attr">selected</span>=<span class="string">"selected"</span>&gt;</span>旅游<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"运动"</span>&gt;</span>运动<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"购物"</span>&gt;</span>购物<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"确定"</span>  /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">value</span>=<span class="string">"重置"</span>  /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><form action="save.php" method="post"><br>    <label>爱好:</label><br>    <select><br>      <option value="看书">看书</option><br>      <option value="旅游" selected="selected">旅游</option><br>      <option value="运动">运动</option><br>      <option value="购物">购物</option><br>    </select><br>    <input type="submit" value="确定"><br>    <input type="reset" value="重置"><br></form>
+
+<p>form表单中的label标签不会向用户呈现任何特殊效果，它的作用是为鼠标用户改进了可用性。如果你在 label 标签内点击文本，就会触发此控件。就是说，当用户单击选中该label标签时，浏览器就会自动将焦点转到和标签相关的表单控件上（就自动选中和该label标签相关连的表单控件上）。语法<code>&lt;label for=&quot;控件id名称&quot;&gt;</code><strong>注意：标签的 for 属性中的值应当与相关控件的 id 属性值一定要相同</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"male"</span>&gt;</span>男<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"gender"</span> <span class="attr">id</span>=<span class="string">"male"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"female"</span>&gt;</span>女<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"gender"</span> <span class="attr">id</span>=<span class="string">"female"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"email"</span>&gt;</span>输入你的邮箱地址<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"email"</span> <span class="attr">placeholder</span>=<span class="string">"Enter email"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<form><br>   <label for="male">男</label><input type="radio" name="gender" id="male"><br>  <label for="female">女</label><input type="radio" name="gender" id="female"><br>  <label for="email">输入你的邮箱地址</label><input type="email" id="email" placeholder="Enter email"><br></form>
+
+<center>本节完<img src="http://www.emoji-cheat-sheet.com/graphics/emojis/relaxed.png" height="20" width="20" align="absmiddle"></center>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/前端/">前端</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/前端/">前端</a>, <a href="/tags/html/">html</a>
+  </div>
+
+<!-- Baidu Button begin -->
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"image":{"viewList":["tsina","weixin","fbook","twi","qzone","tqq","renren","douban","tieba"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","weixin","fbook","twi","qzone","tqq","renren","douban","tieba"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!-- Baidu Button END -->     
+ 
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2016/04/16/1604164/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/04/16/1604162/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/04/16/1604163/" data-title="html基础总结(2)" data-url="http://yoursite.com/2016/04/16/1604163/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"dengysh"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/cocos2dx/">cocos2dx</a><small>2</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>4</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/notepad/">notepad</a><small>1</small></li>
+  
+    <li><a href="/categories/npm/">npm</a><small>1</small></li>
+  
+    <li><a href="/categories/other/">other</a><small>1</small></li>
+  
+    <li><a href="/categories/分享/">分享</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>7</small></li>
+  
+    <li><a href="/categories/图像处理/">图像处理</a><small>3</small></li>
+  
+    <li><a href="/categories/算法/">算法</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">@me</h3>
+<ul class="entry">
+<li><a href="mailto:dys0105@gmail.com?subject=test&cc=sample@hotmail.com&body=use mailto sample">send mail</a></li>
+<li><a href="http://weibo.com/3168347457/profile?topnav=1&wvr=6&is_all=1">Weibo</a></li>
+<li><a href="https://dengysh.github.io">Blog</a></li>
+<li><a href="https://github.com/dengysh">Github</a></li>
+<li><a href="https://www.facebook.com/profile.php?id=100007430838248">Fb</a></li>
+<li><a href="https://twitter.com/dys0105">Twitter</a></li>
+</ul>
+</div>
+
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/OCT/" style="font-size: 15px;">OCT</a> <a href="/tags/cocos2dx/" style="font-size: 12.5px;">cocos2dx</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/emoji/" style="font-size: 10px;">emoji</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/music/" style="font-size: 12.5px;">music</a> <a href="/tags/notepad/" style="font-size: 10px;">notepad</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/其它/" style="font-size: 10px;">其它</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/图像处理/" style="font-size: 15px;">图像处理</a> <a href="/tags/技巧/" style="font-size: 17.5px;">技巧</a> <a href="/tags/游戏开发/" style="font-size: 12.5px;">游戏开发</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://www.csdn.net/" title="title" target="_blank">CSDN  </a></li>
+<li><a href="http://music.163.com/#/discover" title="title" target="_blank">网易云音乐  </a></li>
+<li><a href="http://www.narutom.com/" title="title" target="_blank">火影中文网  </a></li>
+<li><a href="http://www.bilibili.com/" title="title" target="_blank">B站  </a></li>
+<li><a href="http://www.acfun.tv/" title="title" target="_blank">A站</a></li>
+
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3168347457&verifier=e0898823&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+
+
+<a href="https://github.com/dengysh" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="/img/forkme.png" width = "100" height = "100"  alt="Fork me on GitHub"></a>

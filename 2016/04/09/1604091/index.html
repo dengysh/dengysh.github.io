@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<!--baidu tongji-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?08ad12b3f3a57aa8aa23ea41b8bc9214";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!--baidu tongji end-->
+
+  <meta charset="utf-8">
+  
+  <title>OCT(2)——图像降噪之高斯降噪 | Dys&#39;s blog</title>
+  <meta name="author" content="Dys">
+  
+  <meta name="description" content="blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="OCT(2)——图像降噪之高斯降噪"/>
+  <meta property="og:site_name" content="Dys&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+ <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="alternate" href="/atom.xml" title="Dys&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header id="header" class="inner">
+<div class="alignleft">
+  <h1><a href="/">Dys&#39;s blog</a></h1>
+  <h2><a href="/">keep going on!</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/tools">工具</a></li>
+    
+	<li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-04-09T14:33:00.000Z"><a href="/2016/04/09/1604091/">2016-04-09</a></time>
+      
+      
+  
+    <h1 class="title">OCT(2)——图像降噪之高斯降噪</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近这几篇介绍OCT图像的降噪和边缘增强算法，介绍一些传统的降噪的算法，以及基于偏微分方程的降噪方法<img class="emoji" title=":point_down:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f447.png" height="20" width="20" align="absmiddle"></p>
+<h2 id="1-噪声及降噪算法分类"><a href="#1-噪声及降噪算法分类" class="headerlink" title="1. 噪声及降噪算法分类"></a>1. 噪声及降噪算法分类</h2><a id="more"></a>
+<p>　　首先来了解一下噪声的概念。噪声可以理解为“妨碍人们感觉器官对所接收的信源信息理解的因素”。例如，一幅黑白图片，其平面亮度分布假定为f(x，y)，那么对其接收起干扰作用的亮度分布R(x，y)，即可称为图像噪声。但是，噪声在理论上可以定义为“不可预测，只能用概率统计方法来认识的随机误差”。因此将图像噪声看成是多维随机过程是合适的，因而描述噪声的方法完全可以借用随机过程的描述，即用其概率分布函数和概率密度分布函数。但在很多情况下，这样的描述方法是很复杂的，甚至是不可能的。而实际应用往往也不必要。通常是用其数字特征，即均值方差，相关函数等。因为这些数字特征都可以从某些方面反映出噪声的特征</p>
+<p>　　常见的噪声有加性噪声，乘性噪声，量化噪声，椒盐噪声，加性嗓声和图像信号强度是不相关的，如图像在传输过程中引进的“信道噪声”电视摄像机扫描图像的噪声的。乘性嗓声和图像信号是相关的，往往随图像信号的变化而变化。量化嗓声是数字图像的主要噪声源，其大小显示出数字图像和原始图像的差异，减少这种嗓声的最好办法就是采用按灰度级概率密度函数选择化级的最优化措施。椒盐嗓声如图像切割引起的即黑图像上的白点，白图像上的黑点噪声，在变换域引入的误差，使图像反变换后造成的变换噪声等。OCT图像中加性噪声和椒盐噪声最多。
+　　</p>
+<p>　　图像的降噪大致可分为五类：空间域滤波，变换域滤波，偏微分方程，变分法和形态学噪声滤波器。我们着重讨论前三种。空域滤波是在原图像上直接进行数据运算，对像素的灰度值进行处理。常见的空间域图像去噪算法有邻域平均法、中值滤波、低通滤波等。图像变换域去噪方法是对图像进行某种变换，将图像从空间域转换到变换域，再对变换域中的变换系数进行处理，再进行反变换将图像从变换域转换到空间域来达到去除图像嗓声的目的。将图像从空间域转换到变换域的变换方法很多，如傅立叶变换、沃尔什-哈达玛变换、余弦变换、K-L变换以及小波变换等。而傅立叶变换和小波变换则是常见的用于图像去噪的变换方法。</p>
+<p>　　偏微分方程是近年来兴起的一种图像处理方法，主要针对低层图像处理并取得了很好的效果。偏微分方程具有各向异性的特点，应用在图像去噪中，可以在去除噪声的同时，很好的保持边缘。偏微分方程的应用主要可以分为两类:一种是基本的迭代格式，通过随时间变化的更新，使得图像向所要得到的效果逐渐逼近，这种算法的代表为Perona和Malik的方程即P-M模型[7]，以及对其改进后的后续工作。该方法在确定扩散系数时有很大的选择空间，在前向扩散的同时具有后向扩散的功能，所以，具有平滑图像和将边缘尖锐化的能力。偏微分方程在低噪声密度的图像处理中取得了较好的效果，但是在处理高噪声密度图像时去噪效果不好，而且处理时间明显高出许多。</p>
+<h2 id="２-高斯降噪"><a href="#２-高斯降噪" class="headerlink" title="２. 高斯降噪"></a>２. 高斯降噪</h2><p>高斯降噪的原理是利用高斯函数作为模板，与原始图像进行卷积达到降噪的目的，k-delta是一个高斯核或者高斯模板, delta是正态分布的标准差，值越大，图像越模糊(平滑)。</p>
+<center><img src="http://ww1.sinaimg.cn/large/bcd92541gw1f2yf01jhrlj2025013t8h.jpg"></center><br>二维的高斯函数如下：<br><center><img width="250px" src="http://ww3.sinaimg.cn/large/bcd92541gw1f2ycun211pj20bg03bwek.jpg"></center><br>及图像:<br><center><img src="http://ww1.sinaimg.cn/large/bcd92541gw1f2ydusjqfuj20a508d75k.jpg"></center>
+
+<p>　　在二维空间中，这个公式生成的曲面的等高线是从中心开始呈正态分布的同心圆。分布不为零的像素组成的卷积矩阵与原始图像做变换。每个像素的值都是周围相邻像素值的加权平均。原始像素的值有最大的高斯分布值，所以有最大的权重，相邻像素随着距离原始像素越来越远，其权重也越来越小。这样进行模糊处理比其它的均衡模糊滤波器更高地保留了边缘效果。<br>　　理论上来讲，图像中每点的分布都不为零，这也就是说每个像素的计算都需要包含整幅图像。在实际应用中，在计算高斯函数的离散近似时，在大概3σ距离之外的像素都可以看作不起作用，这些像素的计算也就可以忽略。通常，图像处理程序只需要计算(6σ+1)*(6σ+1)的矩阵就可以保证相关像素影响。<br>　　另外在高斯滤波的频域上可以看到高斯模糊的过程是一个低通滤波的过程。高斯模糊的频域表示如下</p>
+<center><img width="300px" src="http://ww1.sinaimg.cn/large/bcd92541gw1f2ye0vxvktj20fj01qaa8.jpg"></center><br>高斯函数的傅里叶变化仍然是高斯形式，可以看到是一个低通滤波器<br><center><img width="300px" src="http://ww1.sinaimg.cn/large/bcd92541gw1f2ye1qsmj7j20bc02lt8s.jpg"></center>
+
+<center>本节到此<img src="http://www.emoji-cheat-sheet.com/graphics/emojis/bowtie.png" height="20" width="20" align="absmiddle"></center>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/图像处理/">图像处理</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/OCT/">OCT</a>, <a href="/tags/图像处理/">图像处理</a>
+  </div>
+
+<!-- Baidu Button begin -->
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"image":{"viewList":["tsina","weixin","fbook","twi","qzone","tqq","renren","douban","tieba"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","weixin","fbook","twi","qzone","tqq","renren","douban","tieba"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!-- Baidu Button END -->     
+ 
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+ <nav id="pagination" >
+    
+    <a href="/2016/04/10/1604101/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/04/06/1604063/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+<section id="comment">
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016/04/09/1604091/" data-title="OCT(2)——图像降噪之高斯降噪" data-url="http://yoursite.com/2016/04/09/1604091/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"dengysh"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->  
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/cocos2dx/">cocos2dx</a><small>2</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>4</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/notepad/">notepad</a><small>1</small></li>
+  
+    <li><a href="/categories/npm/">npm</a><small>1</small></li>
+  
+    <li><a href="/categories/other/">other</a><small>1</small></li>
+  
+    <li><a href="/categories/分享/">分享</a><small>2</small></li>
+  
+    <li><a href="/categories/前端/">前端</a><small>7</small></li>
+  
+    <li><a href="/categories/图像处理/">图像处理</a><small>3</small></li>
+  
+    <li><a href="/categories/算法/">算法</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">@me</h3>
+<ul class="entry">
+<li><a href="mailto:dys0105@gmail.com?subject=test&cc=sample@hotmail.com&body=use mailto sample">send mail</a></li>
+<li><a href="http://weibo.com/3168347457/profile?topnav=1&wvr=6&is_all=1">Weibo</a></li>
+<li><a href="https://dengysh.github.io">Blog</a></li>
+<li><a href="https://github.com/dengysh">Github</a></li>
+<li><a href="https://www.facebook.com/profile.php?id=100007430838248">Fb</a></li>
+<li><a href="https://twitter.com/dys0105">Twitter</a></li>
+</ul>
+</div>
+
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/OCT/" style="font-size: 15px;">OCT</a> <a href="/tags/cocos2dx/" style="font-size: 12.5px;">cocos2dx</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/emoji/" style="font-size: 10px;">emoji</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/music/" style="font-size: 12.5px;">music</a> <a href="/tags/notepad/" style="font-size: 10px;">notepad</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/其它/" style="font-size: 10px;">其它</a> <a href="/tags/分享/" style="font-size: 10px;">分享</a> <a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/图像处理/" style="font-size: 15px;">图像处理</a> <a href="/tags/技巧/" style="font-size: 17.5px;">技巧</a> <a href="/tags/游戏开发/" style="font-size: 12.5px;">游戏开发</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">友情链接</h3>
+<ul class="entry">
+<li><a href="http://www.csdn.net/" title="title" target="_blank">CSDN  </a></li>
+<li><a href="http://music.163.com/#/discover" title="title" target="_blank">网易云音乐  </a></li>
+<li><a href="http://www.narutom.com/" title="title" target="_blank">火影中文网  </a></li>
+<li><a href="http://www.bilibili.com/" title="title" target="_blank">B站  </a></li>
+<li><a href="http://www.acfun.tv/" title="title" target="_blank">A站</a></li>
+
+</ul>
+</div>
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3168347457&verifier=e0898823&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+
+
+<a href="https://github.com/dengysh" target="_blank"><img style="position: absolute; top: 0; left: 0; border: 0;" src="/img/forkme.png" width = "100" height = "100"  alt="Fork me on GitHub"></a>
